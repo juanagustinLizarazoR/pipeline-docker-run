@@ -1,0 +1,17 @@
+name: "Execute Docker Image"
+description: "Runs the Docker Image from GitHub Container Repository"
+inputs:
+  DOCKER_IMAGE_URL:
+    description: "URL of the Docker Image"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - shell: bash
+      env:
+        DOCKER_IMAGE: ${{ inputs.DOCKER_IMAGE_URL }}
+      
+      run: |
+        docker run \
+          --rm \
+          $DOCKER_IMAGE \
